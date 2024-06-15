@@ -1,11 +1,4 @@
-exports.contactUsEmail = (
-    email,
-    firstname,
-    lastname,
-    message,
-    phoneNo,
-    countrycode
-  ) => {
+exports.contactUsEmail = (email, firstname, lastname, message, phoneNo, countrycode) => {
     return `<!DOCTYPE html>
     <html>
     
@@ -94,4 +87,4 @@ exports.contactUsEmail = (
     </body>
     
     </html>`
-  }
+}

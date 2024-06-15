@@ -13,25 +13,9 @@ require("dotenv").config()
 exports.signup = async (req, res) => {
   try {
     // Destructure fields from the request body
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-      accountType,
-      contactNumber,
-      otp,
-    } = req.body
+    const { firstName, lastName, email, password, confirmPassword, accountType, contactNumber, otp } = req.body
     // Check if All Details are there or not
-    if (
-      !firstName ||
-      !lastName ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !otp
-    ) {
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !otp) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
@@ -178,6 +162,8 @@ exports.login = async (req, res) => {
     })
   }
 }
+
+
 // Send OTP For Email Verification
 exports.sendotp = async (req, res) => {
   try {

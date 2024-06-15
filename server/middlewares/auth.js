@@ -1,18 +1,14 @@
 // Importing required modules
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 const User = require("../models/User");
-// Configuring dotenv to load environment variables from .env file
-dotenv.config();
+
 
 // This function is used as middleware to authenticate user requests
 exports.auth = async (req, res, next) => {
 	try {
 		// Extracting JWT from request cookies, body or header
-		const token =
-			req.cookies.token ||
-			req.body.token ||
-			req.header("Authorization").replace("Bearer ", "");
+		const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "");
 
 		// If JWT is missing, return 401 Unauthorized response
 		if (!token) {
@@ -42,6 +38,8 @@ exports.auth = async (req, res, next) => {
 		});
 	}
 };
+
+
 exports.isStudent = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
@@ -59,6 +57,8 @@ exports.isStudent = async (req, res, next) => {
 			.json({ success: false, message: `User Role Can't be Verified` });
 	}
 };
+
+
 exports.isAdmin = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
@@ -76,6 +76,8 @@ exports.isAdmin = async (req, res, next) => {
 			.json({ success: false, message: `User Role Can't be Verified` });
 	}
 };
+
+
 exports.isInstructor = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
