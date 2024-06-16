@@ -39,9 +39,7 @@ export function signUp(accountType, firstName, lastName, email, password, confir
     dispatch(setLoading(true))
     try {
       const response = await apiConnector("POST", SIGNUP_API, { accountType, firstName, lastName, email, password, confirmPassword, otp, })
-
       console.log("SIGNUP API RESPONSE............", response)
-
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
