@@ -62,8 +62,8 @@ exports.isStudent = async (req, res, next) => {
 exports.isAdmin = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
-
-		if (userDetails.accountType !== "Admin") {
+		console.log("userDeatails", userDetails);
+		if (userDetails.accountType !== "Instructor") {
 			return res.status(401).json({
 				success: false,
 				message: "This is a Protected Route for Admin",
