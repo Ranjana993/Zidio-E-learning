@@ -52,10 +52,7 @@ function CourseDetails() {
     const count = GetAvgRating(response?.data?.courseDetails.ratingAndReviews)
     setAvgReviewCount(count)
   }, [response])
-  // console.log("avgReviewCount: ", avgReviewCount)
 
-  // // Collapse all
-  // const [collapse, setCollapse] = useState("")
   const [isActive, setIsActive] = useState(Array(0))
   const handleActive = (id) => {
     // console.log("called", id)
@@ -88,7 +85,7 @@ function CourseDetails() {
   }
 
   const {
-    _id: course_id,
+    _id,
     courseName,
     courseDescription,
     thumbnail,
@@ -161,11 +158,9 @@ function CourseDetails() {
               </div>
               <div className="flex flex-wrap gap-5 text-lg">
                 <p className="flex items-center gap-2">
-                  {" "}
                   <BiInfoCircle /> Created at {formatDate(createdAt)}
                 </p>
                 <p className="flex items-center gap-2">
-                  {" "}
                   <HiOutlineGlobeAlt /> English
                 </p>
               </div>
@@ -242,10 +237,7 @@ function CourseDetails() {
               <p className="text-[28px] font-semibold">Author</p>
               <div className="flex items-center gap-4 py-4">
                 <img
-                  src={
-                    instructor.image
-                      ? instructor.image
-                      : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
+                  src={ instructor.image ? instructor.image : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
                   }
                   alt="Author"
                   className="h-14 w-14 rounded-full object-cover"

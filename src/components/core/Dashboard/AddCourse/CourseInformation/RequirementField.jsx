@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
-export default function RequirementsField({
-  name,
-  label,
-  register,
-  setValue,
-  errors,
-  getValues,
-}) {
+export default function RequirementsField({ name, label, register, setValue, errors }) {
   const { editCourse, course } = useSelector((state) => state.course)
   const [requirement, setRequirement] = useState("")
   const [requirementsList, setRequirementsList] = useState([])

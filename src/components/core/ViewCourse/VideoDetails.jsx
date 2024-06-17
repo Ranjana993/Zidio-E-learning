@@ -32,11 +32,11 @@ const VideoDetails = () => {
         navigate(`/dashboard/enrolled-courses`)
       } else {
         // console.log("courseSectionData", courseSectionData)
-        const filteredData = courseSectionData.filter(
+        const filteredData = courseSectionData?.filter(
           (course) => course._id === sectionId
         )
         // console.log("filteredData", filteredData)
-        const filteredVideoData = filteredData?.[0]?.subSection.filter(
+        const filteredVideoData = filteredData?.[0]?.subSection?.filter(
           (data) => data._id === subSectionId
         )
         // console.log("filteredVideoData", filteredVideoData)

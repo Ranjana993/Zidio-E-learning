@@ -48,11 +48,7 @@ export async function getUserEnrolledCourses(token) {
       }
     )
     console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
-    // console.log(
-    //   "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
-    //   response
-    // )
-
+  
     if (!response.data.success) {
       throw new Error(response.data.message)
     }
@@ -73,10 +69,8 @@ export async function getInstructorData(token) {
     {
       Authorization: `Bearer ${token}`,
     })
-
     console.log("GET_INSTRUCTOR_API_RESPONSE", response);
     result = response?.data?.courses
-
   }
   catch(error) {
     console.log("GET_INSTRUCTOR_API ERROR", error);

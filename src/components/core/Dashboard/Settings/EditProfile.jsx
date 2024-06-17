@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-
 import { updateProfile } from "../../../../services/operations/SettingsAPI"
 import IconBtn from "../../../common/IconBtn"
 
@@ -13,14 +12,9 @@ export default function EditProfile() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   const submitProfileForm = async (data) => {
-    // console.log("Form Data - ", data)
     try {
       dispatch(updateProfile(token, data))
     } catch (error) {
@@ -37,9 +31,7 @@ export default function EditProfile() {
           </h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="firstName" className="lable-style">
-                First Name
-              </label>
+              <label htmlFor="firstName" className="lable-style">First Name</label>
               <input
                 type="text"
                 name="firstName"
@@ -56,9 +48,7 @@ export default function EditProfile() {
               )}
             </div>
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="lastName" className="lable-style">
-                Last Name
-              </label>
+              <label htmlFor="lastName" className="lable-style">Last Name</label>
               <input
                 type="text"
                 name="lastName"
@@ -78,9 +68,7 @@ export default function EditProfile() {
 
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="dateOfBirth" className="lable-style">
-                Date of Birth
-              </label>
+              <label htmlFor="dateOfBirth" className="lable-style">Date of Birth</label>
               <input
                 type="date"
                 name="dateOfBirth"
@@ -105,9 +93,7 @@ export default function EditProfile() {
               )}
             </div>
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="gender" className="lable-style">
-                Gender
-              </label>
+              <label htmlFor="gender" className="lable-style">Gender</label>
               <select
                 type="text"
                 name="gender"
@@ -160,9 +146,7 @@ export default function EditProfile() {
               )}
             </div>
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="about" className="lable-style">
-                About
-              </label>
+              <label htmlFor="about" className="lable-style"> About</label>
               <input
                 type="text"
                 name="about"
@@ -183,9 +167,7 @@ export default function EditProfile() {
 
         <div className="flex justify-end gap-2">
           <button
-            onClick={() => {
-              navigate("/dashboard/my-profile")
-            }}
+            onClick={() => {navigate("/dashboard/my-profile")}}
             className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
           >
             Cancel

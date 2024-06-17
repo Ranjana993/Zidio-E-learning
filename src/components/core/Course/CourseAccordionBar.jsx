@@ -21,16 +21,10 @@ export default function CourseAccordionBar({ course, isActive, handleActive }) {
       <div>
         <div
           className={`flex cursor-pointer items-start justify-between bg-opacity-20 px-7  py-6 transition-[0.3s]`}
-          onClick={() => {
-            handleActive(course._id)
-          }}
+          onClick={() => { handleActive(course._id) }}
         >
           <div className="flex items-center gap-2">
-            <i
-              className={
-                isActive.includes(course._id) ? "rotate-180" : "rotate-0"
-              }
-            >
+            <i className={ isActive.includes(course._id) ? "rotate-180" : "rotate-0"}>
               <AiOutlineDown />
             </i>
             <p>{course?.sectionName}</p>

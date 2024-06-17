@@ -5,25 +5,13 @@ import { IoAddCircleOutline } from "react-icons/io5"
 import { MdNavigateNext } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
 
-import {
-  createSection,
-  updateSection,
-} from "../../../../../services/operations/courseDetailsAPI"
-import {
-  setCourse,
-  setEditCourse,
-  setStep,
-} from "../../../../../slices/courseSlice"
+import { createSection, updateSection, } from "../../../../../services/operations/courseDetailsAPI"
+import { setCourse, setEditCourse, setStep, } from "../../../../../slices/courseSlice"
 import IconBtn from "../../../../common/IconBtn"
 import NestedView from "./NestedView"
 
 export default function CourseBuilderForm() {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm()
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm()
 
   const { course } = useSelector((state) => state.course)
   const { token } = useSelector((state) => state.auth)
@@ -33,9 +21,7 @@ export default function CourseBuilderForm() {
 
   // handle form submission
   const onSubmit = async (data) => {
-    // console.log(data)
     setLoading(true)
-
     let result
 
     if (editSectionName) {
@@ -47,7 +33,6 @@ export default function CourseBuilderForm() {
         },
         token
       )
-      // console.log("edit", result)
     } else {
       result = await createSection(
         {
@@ -58,7 +43,6 @@ export default function CourseBuilderForm() {
       )
     }
     if (result) {
-      // console.log("section result", result)
       dispatch(setCourse(result))
       setEditSectionName(null)
       setValue("sectionName", "")
@@ -115,9 +99,7 @@ export default function CourseBuilderForm() {
             className="form-style w-full"
           />
           {errors.sectionName && (
-            <span className="ml-2 text-xs tracking-wide text-pink-200">
-              Section name is required
-            </span>
+            <span className="ml-2 text-xs tracking-wide text-pink-200">Section name is required</span>
           )}
         </div>
         <div className="flex items-end gap-x-4">
@@ -130,11 +112,7 @@ export default function CourseBuilderForm() {
             <IoAddCircleOutline size={20} className="text-yellow-50" />
           </IconBtn>
           {editSectionName && (
-            <button
-              type="button"
-              onClick={cancelEdit}
-              className="text-sm text-richblack-300 underline"
-            >
+            <button type="button" onClick={cancelEdit} className="text-sm text-richblack-300 underline">
               Cancel Edit
             </button>
           )}

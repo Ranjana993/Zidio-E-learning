@@ -55,7 +55,7 @@ export default function ChipInput({
   // Function to handle deletion of a chip
   const handleDeleteChip = (chipIndex) => {
     // Filter the chips array to remove the chip with the given index
-    const newChips = chips.filter((_, index) => index !== chipIndex)
+    const newChips = chips?.filter((_, index) => index !== chipIndex)
     setChips(newChips)
   }
 

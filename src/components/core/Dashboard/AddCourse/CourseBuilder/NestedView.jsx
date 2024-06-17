@@ -6,10 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import { RxDropdownMenu } from "react-icons/rx"
 import { useDispatch, useSelector } from "react-redux"
 
-import {
-  deleteSection,
-  deleteSubSection,
-} from "../../../../../services/operations/courseDetailsAPI"
+import { deleteSection, deleteSubSection, } from "../../../../../services/operations/courseDetailsAPI"
 import { setCourse } from "../../../../../slices/courseSlice"
 import ConfirmationModal from "../../../../common/ConfirmationModal"
 import SubSectionModal from "./SubSectionModal"
@@ -26,11 +23,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
   const [confirmationModal, setConfirmationModal] = useState(null)
 
   const handleDeleleSection = async (sectionId) => {
-    const result = await deleteSection({
-      sectionId,
-      courseId: course._id,
-      token,
-    })
+    const result = await deleteSection({ sectionId, courseId: course._id, token, })
     if (result) {
       dispatch(setCourse(result))
     }
@@ -52,10 +45,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
 
   return (
     <>
-      <div
-        className="rounded-lg bg-richblack-700 p-6 px-8"
-        id="nestedViewContainer"
-      >
+      <div className="rounded-lg bg-richblack-700 p-6 px-8" id="nestedViewContainer" >
         {course?.courseContent?.map((section) => (
           // Section Dropdown
           <details key={section._id} open>
@@ -68,14 +58,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                 </p>
               </div>
               <div className="flex items-center gap-x-3">
-                <button
-                  onClick={() =>
-                    handleChangeEditSectionName(
-                      section._id,
-                      section.sectionName
-                    )
-                  }
-                >
+                <button onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}>
                   <MdEdit className="text-xl text-richblack-300" />
                 </button>
                 <button
@@ -177,7 +160,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
       {confirmationModal ? (
         <ConfirmationModal modalData={confirmationModal} />
       ) : (
-        <></>
+        null
       )}
     </>
   )
