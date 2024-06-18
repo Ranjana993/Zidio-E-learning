@@ -87,13 +87,11 @@ function App() {
         <Route
           path="/about"
           element={
-
             <About />
 
           }
         />
         <Route path="/contact" element={<Contact />} />
-
         <Route
           element={
             <PrivateRoute>
@@ -102,10 +100,7 @@ function App() {
           }
         >
           <Route path="dashboard/my-profile" element={<MyProfile />} />
-
           <Route path="dashboard/Settings" element={<Settings />} />
-
-
           {
             user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
@@ -114,7 +109,6 @@ function App() {
               </>
             )
           }
-
           {
             user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
               <>
@@ -125,10 +119,7 @@ function App() {
               </>
             )
           }
-
         </Route>
-
-
         <Route element={
           <PrivateRoute>
             <ViewCourse />
@@ -145,14 +136,8 @@ function App() {
               </>
             )
           }
-
         </Route>
-
-
-
         <Route path="*" element={<Error />} />
-
-
       </Routes>
 
     </div>

@@ -3,9 +3,9 @@ const CourseProgress = require("../models/CourseProgress")
 
 const Course = require("../models/Course")
 const User = require("../models/User")
-const { uploadImageToCloudinary } = require("../utils/imageUploader")
 const mongoose = require("mongoose")
 const { convertSecondsToDuration } = require("../utils/secToDuration")
+const uploadOnCloudinary = require("../utils/imageUploader")
 // Method for updating a profile
 exports.updateProfile = async (req, res) => {
   try {
@@ -120,7 +120,7 @@ exports.updateDisplayPicture = async (req, res) => {
     const displayPicture = req.files.displayPicture
     // console.log("displayPicture", displayPicture);
     const userId = req.user.id
-    const image = await uploadImageToCloudinary(
+    const image = await uploadOnCloudinary(
       displayPicture,
       process.env.FOLDER_NAME,
       1000,

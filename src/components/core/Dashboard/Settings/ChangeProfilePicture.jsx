@@ -1,62 +1,80 @@
-import { useEffect, useRef, useState } from "react"
-import { FiUpload } from "react-icons/fi"
-import { useDispatch, useSelector } from "react-redux"
-
-import { updateDisplayPicture } from "../../../../services/operations/SettingsAPI"
-import IconBtn from "../../../common/IconBtn"
+import { useEffect, useRef, useState } from "react";
+import { FiUpload } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { updateDisplayPicture } from "../../../../services/operations/SettingsAPI";
+import IconBtn from "../../../common/IconBtn";
 
 export default function ChangeProfilePicture() {
-  const { token } = useSelector((state) => state.auth)
-  const { user } = useSelector((state) => state.profile)
-  const dispatch = useDispatch()
+  const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false)
-  const [imageFile, setImageFile] = useState(null)
-  const [previewSource, setPreviewSource] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [previewSource, setPreviewSource] = useState(null);
+  const [error, setError] = useState(null);
 
-  const fileInputRef = useRef(null)
+  const fileInputRef = useRef(null);
 
   const handleClick = () => {
-    fileInputRef.current.click()
-  }
+    fileInputRef.current.click();
+  };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    // console.log(file)
+    const file = e.target.files[0];
     if (file) {
-      setImageFile(file)
-      previewFile(file)
+      if (file.size > 1024 * 1024) {
+        setError("File size should be less than 1MB");
+        return;
+      }
+      if (!["image/png", "image/jpeg", "image/gif"].includes(file.type)) {
+        setError("Invalid file type. Only PNG, JPEG, and GIF are allowed.");
+        return;
+      }
+      setError(null);
+      setImageFile(file);
+      previewFile(file);
     }
-  }
+  };
 
   const previewFile = (file) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
-  }
+      setPreviewSource(reader.result);
+    };
+  };
 
   const handleFileUpload = () => {
-    try {
-      console.log("uploading...")
-      setLoading(true)
-      const formData = new FormData()
-      formData.append("displayPicture", imageFile)
-      // console.log("formdata", formData)
-      dispatch(updateDisplayPicture(token, formData)).then(() => {
-        setLoading(false)
-      })
-    } catch (error) {
-      console.log("ERROR MESSAGE - ", error.message)
+    if (!imageFile) {
+      setError("Please select a file first");
+      return;
     }
-  }
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("displayPicture", imageFile);
+
+      dispatch(updateDisplayPicture(token, formData))
+        .then(() => {
+          setLoading(false);
+        })
+        .catch((error) => {
+          setLoading(false);
+          setError(error.message);
+        });
+    } catch (error) {
+      setLoading(false);
+      setError("An error occurred while uploading. Please try again.");
+    }
+  };
 
   useEffect(() => {
     if (imageFile) {
-      previewFile(imageFile)
+      previewFile(imageFile);
     }
-  }, [imageFile])
+  }, [imageFile]);
+
   return (
     <>
       <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
@@ -87,14 +105,13 @@ export default function ChangeProfilePicture() {
                 text={loading ? "Uploading..." : "Upload"}
                 onclick={handleFileUpload}
               >
-                {!loading && (
-                  <FiUpload className="text-lg text-richblack-900" />
-                )}
+                {!loading && <FiUpload className="text-lg text-richblack-900" />}
               </IconBtn>
             </div>
+            {error && <p className="text-red-500">{error}</p>}
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }

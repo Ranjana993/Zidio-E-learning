@@ -1,4 +1,3 @@
-const { Mongoose } = require("mongoose");
 const Category = require("../models/Category");
 function getRandomInt(max) {
     return Math.floor(Math.random() * max)
@@ -31,7 +30,7 @@ exports.createCategory = async (req, res) => {
 
 exports.showAllCategories = async (req, res) => {
 	try {
-        console.log("INSIDE SHOW ALL CATEGORIES");
+        // console.log("INSIDE SHOW ALL CATEGORIES");
 		const allCategorys = await Category.find({});
 		res.status(200).json({
 			success: true,
